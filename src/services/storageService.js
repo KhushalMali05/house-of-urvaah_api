@@ -20,7 +20,7 @@ exports.uploadImage = async (file, folder = 'brand') => {
         if (!file || !file.originalname) {
             throw new Error('Invalid file: missing originalname');
         }
-        
+
         // If it's a disk file (has path), use uploadFromFile
         if (file.path) {
             return await exports.uploadFromFile(file.path, `${folder}/${Date.now()}-${file.originalname}`, file.mimetype);
