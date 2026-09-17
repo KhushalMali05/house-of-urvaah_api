@@ -20,7 +20,7 @@ exports.uploadImage = async (file, folder = 'brand') => {
         if (!file || !file.originalname) {
             throw new Error('Invalid file: missing originalname');
         }
-        
+
         // If it's a disk file (has path), use uploadFromFile
         if (file.path) {
             return await exports.uploadFromFile(file.path, `${folder}/${Date.now()}-${file.originalname}`, file.mimetype);
@@ -78,6 +78,7 @@ exports.deleteImage = async (imageUrl) => {
         if (!imageUrl) return;
 
         // Extract path from URL
+        // Example URL: https://xyz.supabase.co/storage/v1/object/public/mediveda/brand/filename.jpg
         const path = imageUrl?.split(`${BUCKET_NAME}/`).pop();
 
         const { data, error } = await supabase.storage
