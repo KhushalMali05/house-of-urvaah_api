@@ -1,8 +1,19 @@
 const supabase = require('../config/supabaseClient');
 
-const BUCKET_NAME = 'mediveda';
+const BUCKET_NAME = process.env.SUPABASE_STORAGE_BUCKET || 'house-ofvaah';
 
 const fs = require('fs');
+
+/**
+ * Get public URL for any media file stored in house-ofvaah bucket
+ * @param {string} filePath e.g. "Videos/Hero-section-video-two.mp4" or "Images/logo.png"
+ */
+exports.getPublicMediaUrl = (filePath) => {
+    const { data } = supabase.storage
+        .from(BUCKET_NAME)
+        .getPublicUrl(filePath);
+    return data.publicUrl;
+};
 
 exports.uploadImage = async (file, folder = 'brand') => {
     try {
