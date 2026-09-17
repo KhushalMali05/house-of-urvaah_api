@@ -1,7 +1,7 @@
 {
-  "name": "homeved-api",
+  "name": "house-of-urvaah-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "House of Urvaah Female Clothing E-Commerce API",
   "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
