@@ -1,18 +1,32 @@
 const supabase = require('../config/supabaseClient');
 
-const BUCKET_NAME = process.env.SUPABASE_STORAGE_BUCKET || 'house-ofvaah';
+const BUCKET_NAME = process.env.SUPABASE_STORAGE_BUCKET || 'houseofurvaah-media';
 
 const fs = require('fs');
 
 /**
- * Get public URL for any media file stored in house-ofvaah bucket
- * @param {string} filePath e.g. "Videos/Hero-section-video-two.mp4" or "Images/logo.png"
+ * Get public URL for any media file stored in houseofurvaah-media bucket
+ * @param {string} filePath e.g. "products/product-001/front.webp" or "Images/Brown02.png"
  */
 exports.getPublicMediaUrl = (filePath) => {
-    const { data } = supabase.storage
-        .from(BUCKET_NAME)
-        .getPublicUrl(filePath);
-    return data.publicUrl;
+    if (!filePath) return '';
+    if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
+        return filePath;
+    }
+    let cleanPath = filePath.startsWith('/') ? filePath.slice(1) : filePath;
+    if (cleanPath.startsWith('assets/')) {
+        cleanPath = cleanPath.replace(/^assets\//, '');
+    }
+
+    if (supabase) {
+        const { data } = supabase.storage
+            .from(BUCKET_NAME)
+            .getPublicUrl(cleanPath);
+        return data.publicUrl;
+    }
+
+    const supabaseUrl = process.env.SUPABASE_URL || 'https://fhbdceauisvlcpmuzpmf.supabase.co';
+    return `${supabaseUrl}/storage/v1/object/public/${BUCKET_NAME}/${cleanPath}`;
 };
 
 exports.uploadImage = async (file, folder = 'brand') => {
