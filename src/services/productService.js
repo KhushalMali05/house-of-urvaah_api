@@ -24,6 +24,13 @@ const mapProduct = (p) => ({
     directions: p.directions,
     supports: p.supports || [],
     expiryInfo: p.expiryinfo,
+    sizes: p.sizes || ['S', 'M', 'L', 'XL'],
+    colors: p.colors || ['Default'],
+    fabric: p.fabric || '',
+    fitType: p.fit_type || '',
+    careInstructions: p.care_instructions || '',
+    sizeChartUrl: p.size_chart_url || '',
+    styleCode: p.style_code || '',
     subCategory: p.subcategory_name || '', // Use joined name
     subCategoryId: p.subcategory_id || '', // Keep ID for reference
     specifications: p.specifications,
