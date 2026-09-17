@@ -27,3 +27,10 @@ WHERE NOT EXISTS (SELECT 1 FROM public.categories WHERE name = 'Loungewear & Nig
 INSERT INTO public.categories (name, description, is_active)
 SELECT 'Dupattas & Scarves', 'Designer Dupattas, Stoles & Scarves', true
 WHERE NOT EXISTS (SELECT 1 FROM public.categories WHERE name = 'Dupattas & Scarves');
+
+INSERT INTO public.categories (name, description, is_active)
+SELECT 'Fashion Accessories', 'Jewellery, Handbags & Footwear', true
+WHERE NOT EXISTS (SELECT 1 FROM public.categories WHERE name = 'Fashion Accessories');
+
+-- 3. Rename or adapt Health Tips table to Style Guides
+ALTER TABLE IF EXISTS public.health_tips RENAME TO style_guides;
