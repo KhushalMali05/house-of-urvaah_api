@@ -12,7 +12,7 @@ process.on('unhandledRejection', (reason, promise) => {
     process.exit(1);
 });
 
-console.log('--- STARTING HOMEVED API ---');
+console.log('--- STARTING Urvah API ---');
 console.log('Node Version:', process.version);
 console.log('CWD:', process.cwd());
 
@@ -38,7 +38,7 @@ if (require.main === module) {
         console.error('❌ Server startup error:', err);
         process.exit(1);
     });
-    
+
     // Increase timeout for large file uploads (10 minutes)
     server.timeout = 600000;
 } else {
